@@ -10,9 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Random;
+import java.util.*;
 
 public class MainProg {
     private DefaultListModel<String> allPlayers;
@@ -42,6 +40,11 @@ public class MainProg {
     private JButton endButton;
     private JPanel centreNorth;
     private JTextField lastHits;
+    private JPanel setupSouthStart;
+    private JPanel setupSouthRepeat;
+    private JButton samePlayers;
+    private JButton newPlayers;
+    private JButton quit;
     private int max = 10;
     private int turn = 1;
     private int score = 0;
@@ -53,6 +56,7 @@ public class MainProg {
     int score3;
 
     private MainProg() {
+
         allPlayers = new DefaultListModel<>();
         playerList.setModel(allPlayers);
         playerTable.setModel(model);
@@ -92,37 +96,9 @@ public class MainProg {
 
         STARTButton.addActionListener(e -> {
 
-            if (laneNo.getText().length() != 1) {
-                JOptionPane.showMessageDialog(null, "Enter a lane.");
-            } else {
-                if (playerCount >= 2) {
-                    int lane = 0;
-                    try {
-                        lane = Integer.parseInt(laneNo.getText());
-                    } catch (NumberFormatException e1) {
-                        JOptionPane.showMessageDialog(null, "Lane number MUST BE A NUMBER");
-                        lane = -1;
-                    }
-                    if (lane != -1) {
-                        for (int i = 0; i < playerCount; i++) {
-                            String playerID = "" + laneNo.getText() + i;
-                            String name = allPlayers.getElementAt(i);
-                            int finalScore = 0;
-                            players.addPlayer(new Player(playerID, name, finalScore, lane));
-                        }
+            InitializeGame();
 
-                        newGame.setVisible(false);
-                        runGame.setVisible(true);
-                        MainPanel.revalidate();
-                        MainPanel.repaint();
-                        GameSetup();
-                        playerTable.setSelectionBackground(Color.CYAN);
-                        playerTable.setRowSelectionInterval(0, 0);
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Must include 2 or more players.");
-                    }
-                }}});
+        });
 
         laneNo.addKeyListener(new KeyAdapter() {
             @Override
@@ -166,12 +142,14 @@ public class MainProg {
             }}
             else{Bowl10();}
         });
+
         endButton.addActionListener(e -> {
             newGame.setVisible(true);
             runGame.setVisible(false);
             allPlayers.clear();
             centreNorth.setVisible(false);
-            setupSouth.setVisible(false);
+            setupSouthStart.setVisible(false);
+            setupSouthRepeat.setVisible(true);
 
             Display();
             String first = allPlayers.get(0);
@@ -179,6 +157,109 @@ public class MainProg {
             mainName.setSize(20,20);
             mainName.setText("Complete! Well done " + winner + "!");
         });
+
+        quit.addActionListener(e -> {
+            System.exit(0);
+        });
+
+        samePlayers.addActionListener(e -> {
+
+            resetModel();
+            playerCount = allPlayers.size();
+            boolean doShuffle = true;
+            String[] options = {"Shuffle","This order"};
+            int shuffle = JOptionPane.showOptionDialog(null,
+                    "Do you want to play this order, or a random order?",
+                    "Choose an option",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    options,
+                    "Shuffle");
+            if (shuffle == 0){doShuffle = true;}     //Shuffle
+            else if(shuffle == 1){doShuffle = false;}      //This order
+
+            resetGame(doShuffle);
+        });
+
+        newPlayers.addActionListener(e -> {
+            allPlayers.clear();
+            playerCount = 0;
+            resetModel();
+            setupSouthRepeat.setVisible(false);
+            setupSouthStart.setVisible(true);
+            centreNorth.setVisible(true);
+            mainName.setText("Welcome to Birch Bowling");
+
+        });
+    }
+
+    private void resetModel() {
+        if (model.getRowCount() > 0) {
+            for (int i = model.getRowCount() - 1; i > -1; i--) {
+                model.removeRow(i);
+            }
+        }
+    }
+
+    private void resetGame(boolean doShuffle) {
+        for (int i = 0; i < playerCount; i++){
+            String name = allPlayers.getElementAt(i);
+            name = name.substring(6);
+            allPlayers.setElementAt(name, i);
+        }
+
+        if (doShuffle){
+            ArrayList<String> tempList = new ArrayList<>();
+            for (int i = 0; i < playerCount; i++){
+                tempList.add(allPlayers.getElementAt(i));
+            }
+            Collections.shuffle(tempList);
+            allPlayers.clear();
+            for (String name : tempList){allPlayers.addElement(name);}
+        }
+        InitializeGame();
+    }
+
+    private void InitializeGame() {
+        lastHits.setText("No pins have been struck.");
+        endButton.setVisible(false);
+        bowlButton.setVisible(true);
+        currentFrame = 1;
+        currentPlayer = 0;
+
+        if (laneNo.getText().length() != 1) {
+            JOptionPane.showMessageDialog(null, "Enter a lane.");
+        } else {
+            if (playerCount >= 2) {
+                int lane;
+                try {
+                    lane = Integer.parseInt(laneNo.getText());
+                } catch (NumberFormatException e1) {
+                    JOptionPane.showMessageDialog(null, "Lane number MUST BE A NUMBER");
+                    lane = -1;
+                }
+                if (lane != -1) {
+                    for (int i = 0; i < playerCount; i++) {
+                        String playerID = "" + laneNo.getText() + i;
+                        String name = allPlayers.getElementAt(i);
+                        int finalScore = 0;
+                        players.addPlayer(new Player(playerID, name, finalScore, lane));
+                    }
+
+                    newGame.setVisible(false);
+                    runGame.setVisible(true);
+                    MainPanel.revalidate();
+                    MainPanel.repaint();
+                    GameSetup();
+                    playerTable.setSelectionBackground(Color.CYAN);
+                    playerTable.setRowSelectionInterval(0, 0);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Must include 2 or more players.");
+                }
+            }
+        }
     }
 
     private void Display() {
@@ -219,12 +300,16 @@ public class MainProg {
 
     private int BowlBall(int max){
         Random rand = new Random();
-        return( rand.nextInt(max+1));
+        int score = rand.nextInt(max+1);
+        if (score == 0){score = rand.nextInt(max+1);}
+        return( score);
     }
 
     private void GameSetup(){
-        for (String title : TABLE_HEADINGS){
-            model.addColumn(title);
+        if (model.getColumnCount() == 0) {
+            for (String title : TABLE_HEADINGS){
+                model.addColumn(title);
+            }
         }
         players.players.forEach(player -> PlayerSetup(player));
     }
@@ -246,6 +331,7 @@ public class MainProg {
         String storeScore = "" + score1 + "  | " + score2;
         ScoreHandler(score1, score2, storeScore, player);
     }
+
     private void ScoreHandler(int score1, int score2, String storeScore ,Player player) {
 
             if (currentFrame != 1) {
@@ -280,6 +366,7 @@ public class MainProg {
             player.setOverallScore(overall  + score1 + score2);
         }
     }
+
     private void ScoreHandle2(Player player, int score1, int score2){
         int throw1 = score1;
         int throw2 = score2;
@@ -292,8 +379,6 @@ public class MainProg {
         player.setOverallScore(overall);
 
     }
-
-
 
     private String[] SetRowData(Player player){
         String name = player.getPlayerName();
@@ -318,7 +403,6 @@ public class MainProg {
         model.addRow(data);
 
     }
-
 
     private void Frame10(int score1, int score2, int score3 ,Player player){
         player.setOverallScore( player.getOverallScore() + score1 + score2 + score3);
@@ -400,7 +484,6 @@ public class MainProg {
             playerTable.setRowSelectionInterval(currentPlayer, currentPlayer);
 
         }
-
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("MainProg");

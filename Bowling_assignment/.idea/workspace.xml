@@ -37,21 +37,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainProg.form" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainProg.form" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MainProg.form">
           <provider selected="true" editor-type-id="ui-designer">
             <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainProg.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainProg.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainProg.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
-              <caret line="221" column="35" lean-forward="false" selection-start-line="221" selection-start-column="35" selection-end-line="221" selection-end-column="35" />
+            <state relative-caret-position="538">
+              <caret line="497" column="0" lean-forward="true" selection-start-line="497" selection-start-column="0" selection-end-line="497" selection-end-column="0" />
               <folding>
-                <element signature="e#4804#5124#0" expanded="true" />
-                <element signature="e#5123#5124#0" expanded="true" />
+                <element signature="e#2204#2703#0" expanded="false" />
+                <element signature="e#2754#3056#0" expanded="false" />
+                <element signature="e#3101#3357#0" expanded="false" />
+                <element signature="e#3400#3448#0" expanded="false" />
+                <element signature="e#3843#4944#0" expanded="false" />
+                <element signature="e#4984#5470#0" expanded="false" />
+                <element signature="e#5505#5549#0" expanded="false" />
+                <element signature="e#5591#6306#0" expanded="false" />
+                <element signature="e#6347#6645#0" expanded="false" />
+                <element signature="method#resetModel#0;class#MainProg#0" expanded="false" />
+                <element signature="method#resetGame#0;class#MainProg#0" expanded="false" />
+                <element signature="method#InitializeGame#0;class#MainProg#0" expanded="false" />
+                <element signature="method#Display#0;class#MainProg#0" expanded="false" />
+                <element signature="method#Sort#0;class#MainProg#0" expanded="false" />
+                <element signature="method#BowlBall#0;class#MainProg#0" expanded="false" />
                 <element signature="method#GameSetup#0;class#MainProg#0" expanded="false" />
                 <element signature="method#Strike#0;class#MainProg#0" expanded="false" />
                 <element signature="method#Spare#0;class#MainProg#0" expanded="false" />
@@ -62,6 +75,8 @@
                 <element signature="method#SetRowData#0;class#MainProg#0" expanded="false" />
                 <element signature="method#PlayerSetup#0;class#MainProg#0" expanded="false" />
                 <element signature="method#Frame10#0;class#MainProg#0" expanded="false" />
+                <element signature="method#Bowl10#0;class#MainProg#0" expanded="false" />
+                <element signature="method#nextPlayer#0;class#MainProg#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -105,8 +120,8 @@
         <option value="$PROJECT_DIR$/src/Player.java" />
         <option value="$PROJECT_DIR$/src/Players.java" />
         <option value="$PROJECT_DIR$/src/Scoresheet.java" />
-        <option value="$PROJECT_DIR$/src/MainProg.java" />
         <option value="$PROJECT_DIR$/src/MainProg.form" />
+        <option value="$PROJECT_DIR$/src/MainProg.java" />
       </list>
     </option>
   </component>
@@ -132,9 +147,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -151,6 +163,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -301,12 +316,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32608697" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32608697" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13006397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13113007" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33152175" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -320,7 +336,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Project Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33152175" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Message Pane" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -363,18 +378,42 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/MainProg.java</url>
-          <line>250</line>
+          <line>336</line>
           <properties />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/MainProg.java</url>
-          <line>380</line>
+          <line>464</line>
           <properties />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/MainProg.java</url>
+          <line>370</line>
+          <properties />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/MainProg.java</url>
+          <line>356</line>
+          <properties />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/MainProg.java</url>
+          <line>266</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/MainProg.java</url>
+          <line>205</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="11" />
+      <option name="time" value="21" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -409,8 +448,21 @@
         <state relative-caret-position="1989">
           <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
           <folding>
-            <element signature="e#4804#5124#0" expanded="true" />
-            <element signature="e#5123#5124#0" expanded="true" />
+            <element signature="e#2204#2703#0" expanded="false" />
+            <element signature="e#2754#3056#0" expanded="false" />
+            <element signature="e#3101#3357#0" expanded="false" />
+            <element signature="e#3400#3448#0" expanded="false" />
+            <element signature="e#3843#4944#0" expanded="false" />
+            <element signature="e#4984#5470#0" expanded="false" />
+            <element signature="e#5505#5549#0" expanded="false" />
+            <element signature="e#5591#6306#0" expanded="false" />
+            <element signature="e#6347#6645#0" expanded="false" />
+            <element signature="method#resetModel#0;class#MainProg#0" expanded="false" />
+            <element signature="method#resetGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#InitializeGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Display#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Sort#0;class#MainProg#0" expanded="false" />
+            <element signature="method#BowlBall#0;class#MainProg#0" expanded="false" />
             <element signature="method#GameSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Strike#0;class#MainProg#0" expanded="false" />
             <element signature="method#Spare#0;class#MainProg#0" expanded="false" />
@@ -421,6 +473,8 @@
             <element signature="method#SetRowData#0;class#MainProg#0" expanded="false" />
             <element signature="method#PlayerSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Frame10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Bowl10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#nextPlayer#0;class#MainProg#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -453,8 +507,21 @@
         <state relative-caret-position="1938">
           <caret line="114" column="1" lean-forward="true" selection-start-line="114" selection-start-column="1" selection-end-line="114" selection-end-column="1" />
           <folding>
-            <element signature="e#4804#5124#0" expanded="true" />
-            <element signature="e#5123#5124#0" expanded="true" />
+            <element signature="e#2204#2703#0" expanded="false" />
+            <element signature="e#2754#3056#0" expanded="false" />
+            <element signature="e#3101#3357#0" expanded="false" />
+            <element signature="e#3400#3448#0" expanded="false" />
+            <element signature="e#3843#4944#0" expanded="false" />
+            <element signature="e#4984#5470#0" expanded="false" />
+            <element signature="e#5505#5549#0" expanded="false" />
+            <element signature="e#5591#6306#0" expanded="false" />
+            <element signature="e#6347#6645#0" expanded="false" />
+            <element signature="method#resetModel#0;class#MainProg#0" expanded="false" />
+            <element signature="method#resetGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#InitializeGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Display#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Sort#0;class#MainProg#0" expanded="false" />
+            <element signature="method#BowlBall#0;class#MainProg#0" expanded="false" />
             <element signature="method#GameSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Strike#0;class#MainProg#0" expanded="false" />
             <element signature="method#Spare#0;class#MainProg#0" expanded="false" />
@@ -465,6 +532,8 @@
             <element signature="method#SetRowData#0;class#MainProg#0" expanded="false" />
             <element signature="method#PlayerSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Frame10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Bowl10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#nextPlayer#0;class#MainProg#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -499,8 +568,21 @@
         <state relative-caret-position="323">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
-            <element signature="e#4804#5124#0" expanded="true" />
-            <element signature="e#5123#5124#0" expanded="true" />
+            <element signature="e#2204#2703#0" expanded="false" />
+            <element signature="e#2754#3056#0" expanded="false" />
+            <element signature="e#3101#3357#0" expanded="false" />
+            <element signature="e#3400#3448#0" expanded="false" />
+            <element signature="e#3843#4944#0" expanded="false" />
+            <element signature="e#4984#5470#0" expanded="false" />
+            <element signature="e#5505#5549#0" expanded="false" />
+            <element signature="e#5591#6306#0" expanded="false" />
+            <element signature="e#6347#6645#0" expanded="false" />
+            <element signature="method#resetModel#0;class#MainProg#0" expanded="false" />
+            <element signature="method#resetGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#InitializeGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Display#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Sort#0;class#MainProg#0" expanded="false" />
+            <element signature="method#BowlBall#0;class#MainProg#0" expanded="false" />
             <element signature="method#GameSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Strike#0;class#MainProg#0" expanded="false" />
             <element signature="method#Spare#0;class#MainProg#0" expanded="false" />
@@ -511,6 +593,8 @@
             <element signature="method#SetRowData#0;class#MainProg#0" expanded="false" />
             <element signature="method#PlayerSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Frame10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Bowl10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#nextPlayer#0;class#MainProg#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -535,8 +619,21 @@
         <state relative-caret-position="425">
           <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
-            <element signature="e#4804#5124#0" expanded="true" />
-            <element signature="e#5123#5124#0" expanded="true" />
+            <element signature="e#2204#2703#0" expanded="false" />
+            <element signature="e#2754#3056#0" expanded="false" />
+            <element signature="e#3101#3357#0" expanded="false" />
+            <element signature="e#3400#3448#0" expanded="false" />
+            <element signature="e#3843#4944#0" expanded="false" />
+            <element signature="e#4984#5470#0" expanded="false" />
+            <element signature="e#5505#5549#0" expanded="false" />
+            <element signature="e#5591#6306#0" expanded="false" />
+            <element signature="e#6347#6645#0" expanded="false" />
+            <element signature="method#resetModel#0;class#MainProg#0" expanded="false" />
+            <element signature="method#resetGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#InitializeGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Display#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Sort#0;class#MainProg#0" expanded="false" />
+            <element signature="method#BowlBall#0;class#MainProg#0" expanded="false" />
             <element signature="method#GameSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Strike#0;class#MainProg#0" expanded="false" />
             <element signature="method#Spare#0;class#MainProg#0" expanded="false" />
@@ -547,6 +644,8 @@
             <element signature="method#SetRowData#0;class#MainProg#0" expanded="false" />
             <element signature="method#PlayerSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Frame10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Bowl10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#nextPlayer#0;class#MainProg#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -591,8 +690,21 @@
         <state relative-caret-position="1139">
           <caret line="73" column="59" lean-forward="false" selection-start-line="73" selection-start-column="59" selection-end-line="73" selection-end-column="59" />
           <folding>
-            <element signature="e#4804#5124#0" expanded="true" />
-            <element signature="e#5123#5124#0" expanded="true" />
+            <element signature="e#2204#2703#0" expanded="false" />
+            <element signature="e#2754#3056#0" expanded="false" />
+            <element signature="e#3101#3357#0" expanded="false" />
+            <element signature="e#3400#3448#0" expanded="false" />
+            <element signature="e#3843#4944#0" expanded="false" />
+            <element signature="e#4984#5470#0" expanded="false" />
+            <element signature="e#5505#5549#0" expanded="false" />
+            <element signature="e#5591#6306#0" expanded="false" />
+            <element signature="e#6347#6645#0" expanded="false" />
+            <element signature="method#resetModel#0;class#MainProg#0" expanded="false" />
+            <element signature="method#resetGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#InitializeGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Display#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Sort#0;class#MainProg#0" expanded="false" />
+            <element signature="method#BowlBall#0;class#MainProg#0" expanded="false" />
             <element signature="method#GameSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Strike#0;class#MainProg#0" expanded="false" />
             <element signature="method#Spare#0;class#MainProg#0" expanded="false" />
@@ -603,6 +715,8 @@
             <element signature="method#SetRowData#0;class#MainProg#0" expanded="false" />
             <element signature="method#PlayerSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Frame10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Bowl10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#nextPlayer#0;class#MainProg#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -627,8 +741,21 @@
         <state relative-caret-position="1071">
           <caret line="68" column="13" lean-forward="true" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
           <folding>
-            <element signature="e#4804#5124#0" expanded="true" />
-            <element signature="e#5123#5124#0" expanded="true" />
+            <element signature="e#2204#2703#0" expanded="false" />
+            <element signature="e#2754#3056#0" expanded="false" />
+            <element signature="e#3101#3357#0" expanded="false" />
+            <element signature="e#3400#3448#0" expanded="false" />
+            <element signature="e#3843#4944#0" expanded="false" />
+            <element signature="e#4984#5470#0" expanded="false" />
+            <element signature="e#5505#5549#0" expanded="false" />
+            <element signature="e#5591#6306#0" expanded="false" />
+            <element signature="e#6347#6645#0" expanded="false" />
+            <element signature="method#resetModel#0;class#MainProg#0" expanded="false" />
+            <element signature="method#resetGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#InitializeGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Display#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Sort#0;class#MainProg#0" expanded="false" />
+            <element signature="method#BowlBall#0;class#MainProg#0" expanded="false" />
             <element signature="method#GameSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Strike#0;class#MainProg#0" expanded="false" />
             <element signature="method#Spare#0;class#MainProg#0" expanded="false" />
@@ -639,6 +766,8 @@
             <element signature="method#SetRowData#0;class#MainProg#0" expanded="false" />
             <element signature="method#PlayerSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Frame10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Bowl10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#nextPlayer#0;class#MainProg#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -679,8 +808,21 @@
         <state relative-caret-position="731">
           <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding>
-            <element signature="e#4804#5124#0" expanded="true" />
-            <element signature="e#5123#5124#0" expanded="true" />
+            <element signature="e#2204#2703#0" expanded="false" />
+            <element signature="e#2754#3056#0" expanded="false" />
+            <element signature="e#3101#3357#0" expanded="false" />
+            <element signature="e#3400#3448#0" expanded="false" />
+            <element signature="e#3843#4944#0" expanded="false" />
+            <element signature="e#4984#5470#0" expanded="false" />
+            <element signature="e#5505#5549#0" expanded="false" />
+            <element signature="e#5591#6306#0" expanded="false" />
+            <element signature="e#6347#6645#0" expanded="false" />
+            <element signature="method#resetModel#0;class#MainProg#0" expanded="false" />
+            <element signature="method#resetGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#InitializeGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Display#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Sort#0;class#MainProg#0" expanded="false" />
+            <element signature="method#BowlBall#0;class#MainProg#0" expanded="false" />
             <element signature="method#GameSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Strike#0;class#MainProg#0" expanded="false" />
             <element signature="method#Spare#0;class#MainProg#0" expanded="false" />
@@ -691,6 +833,8 @@
             <element signature="method#SetRowData#0;class#MainProg#0" expanded="false" />
             <element signature="method#PlayerSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Frame10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Bowl10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#nextPlayer#0;class#MainProg#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -789,13 +933,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainProg.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/MainProg.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="221" column="35" lean-forward="false" selection-start-line="221" selection-start-column="35" selection-end-line="221" selection-end-column="35" />
+        <state relative-caret-position="538">
+          <caret line="497" column="0" lean-forward="true" selection-start-line="497" selection-start-column="0" selection-end-line="497" selection-end-column="0" />
           <folding>
-            <element signature="e#4804#5124#0" expanded="true" />
-            <element signature="e#5123#5124#0" expanded="true" />
+            <element signature="e#2204#2703#0" expanded="false" />
+            <element signature="e#2754#3056#0" expanded="false" />
+            <element signature="e#3101#3357#0" expanded="false" />
+            <element signature="e#3400#3448#0" expanded="false" />
+            <element signature="e#3843#4944#0" expanded="false" />
+            <element signature="e#4984#5470#0" expanded="false" />
+            <element signature="e#5505#5549#0" expanded="false" />
+            <element signature="e#5591#6306#0" expanded="false" />
+            <element signature="e#6347#6645#0" expanded="false" />
+            <element signature="method#resetModel#0;class#MainProg#0" expanded="false" />
+            <element signature="method#resetGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#InitializeGame#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Display#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Sort#0;class#MainProg#0" expanded="false" />
+            <element signature="method#BowlBall#0;class#MainProg#0" expanded="false" />
             <element signature="method#GameSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Strike#0;class#MainProg#0" expanded="false" />
             <element signature="method#Spare#0;class#MainProg#0" expanded="false" />
@@ -806,13 +968,10 @@
             <element signature="method#SetRowData#0;class#MainProg#0" expanded="false" />
             <element signature="method#PlayerSetup#0;class#MainProg#0" expanded="false" />
             <element signature="method#Frame10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#Bowl10#0;class#MainProg#0" expanded="false" />
+            <element signature="method#nextPlayer#0;class#MainProg#0" expanded="false" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainProg.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
       </provider>
     </entry>
   </component>

@@ -2,11 +2,11 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="MainProg">
   <grid id="3a009" binding="MainPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
     <constraints>
-      <xy x="56" y="17" width="1000" height="1000"/>
+      <xy x="56" y="17" width="1300" height="1000"/>
     </constraints>
     <properties>
-      <minimumSize width="1000" height="1000"/>
-      <preferredSize width="800" height="1000"/>
+      <minimumSize width="1300" height="550"/>
+      <preferredSize width="1300" height="550"/>
       <visible value="true"/>
     </properties>
     <border type="none"/>
@@ -38,34 +38,74 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="61f81" class="javax.swing.JButton" binding="clearAllButton" default-binding="true">
+              <grid id="7f587" binding="setupSouthStart" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="61f81" class="javax.swing.JButton" binding="clearAllButton" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="150" height="32"/>
+                      <text value="Clear All"/>
+                    </properties>
+                  </component>
+                  <component id="924c7" class="javax.swing.JButton" binding="removeSelectedButton" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="150" height="32"/>
+                      <text value="Remove Selected"/>
+                    </properties>
+                  </component>
+                  <component id="57e18" class="javax.swing.JButton" binding="addNewButton" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="150" height="32"/>
+                      <text value="Add New"/>
+                    </properties>
+                  </component>
+                  <component id="7f48f" class="javax.swing.JButton" binding="STARTButton" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="150" height="32"/>
+                      <text value="START"/>
+                    </properties>
+                  </component>
+                  <hspacer id="915f">
+                    <constraints/>
+                  </hspacer>
+                  <vspacer id="9660e">
+                    <constraints/>
+                  </vspacer>
+                </children>
+              </grid>
+              <grid id="32cf2" binding="setupSouthRepeat" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints/>
                 <properties>
-                  <preferredSize width="150" height="32"/>
-                  <text value="Clear All"/>
+                  <visible value="false"/>
                 </properties>
-              </component>
-              <component id="924c7" class="javax.swing.JButton" binding="removeSelectedButton" default-binding="true">
-                <constraints/>
-                <properties>
-                  <preferredSize width="150" height="32"/>
-                  <text value="Remove Selected"/>
-                </properties>
-              </component>
-              <component id="57e18" class="javax.swing.JButton" binding="addNewButton" default-binding="true">
-                <constraints/>
-                <properties>
-                  <preferredSize width="150" height="32"/>
-                  <text value="Add New"/>
-                </properties>
-              </component>
-              <component id="7f48f" class="javax.swing.JButton" binding="STARTButton" default-binding="true">
-                <constraints/>
-                <properties>
-                  <preferredSize width="150" height="32"/>
-                  <text value="START"/>
-                </properties>
-              </component>
+                <border type="none"/>
+                <children>
+                  <component id="47287" class="javax.swing.JButton" binding="samePlayers">
+                    <constraints/>
+                    <properties>
+                      <text value="Same Players"/>
+                    </properties>
+                  </component>
+                  <component id="b8b2d" class="javax.swing.JButton" binding="newPlayers">
+                    <constraints/>
+                    <properties>
+                      <text value="New Players"/>
+                    </properties>
+                  </component>
+                  <component id="c8eb9" class="javax.swing.JButton" binding="quit">
+                    <constraints/>
+                    <properties>
+                      <text value="Exit"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
             </children>
           </grid>
           <grid id="3a838" binding="setupCentre" layout-manager="BorderLayout" hgap="0" vgap="0">
