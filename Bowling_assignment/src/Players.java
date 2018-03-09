@@ -8,6 +8,8 @@ class Players {
 
     public void addPlayer(Player person){ players.add(person); }
 
+    public int getSize(){return players.size();}
+
     ArrayList<Player> players = new ArrayList<>();
 
 }
