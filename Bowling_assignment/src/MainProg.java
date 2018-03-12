@@ -1,10 +1,5 @@
-import com.sun.deploy.util.StringUtils;
-import jdk.nashorn.internal.scripts.JO;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,6 +29,9 @@ public class MainProg {
     private String TABLE_HEADINGS[] = new String[] {"Name", "Frame 1", "Frame 2", "Frame 3", "Frame 4", "Frame 5", "Frame 6", "Frame 7", "Frame 8", "Frame 9", "Frame 10", "Overall"};
     private Players players = new Players();
     private DefaultTableModel model = new DefaultTableModel();
+    private DefaultTableModel foodModel = new DefaultTableModel();
+    private DefaultTableModel drinksModel = new DefaultTableModel();
+    private DefaultTableModel orderModel = new DefaultTableModel();
     private JTable playerTable;
     private JButton orderButton;
     private JButton bowlButton;
@@ -45,6 +43,24 @@ public class MainProg {
     private JButton samePlayers;
     private JButton newPlayers;
     private JButton quit;
+    private JPanel cafePanel;
+    private JPanel cafeNorth;
+    private JPanel cafeWest;
+    private JButton addFood;
+    private JTable foodTable;
+    private JPanel cafeEast;
+    private JButton addDrink;
+    private JTable drinksTable;
+    private JPanel cafeCentre;
+    private JPanel cafeCentreButtons;
+    private JButton cancelOrderButton;
+    private JButton clearOrderButton;
+    private JTable playerOrder;
+    private JButton removeSelectedButton1;
+    private JButton placeOrderButton;
+    private JLabel orderTotal;
+    private JPanel cafeSouth;
+    private JLabel currentPlayerDisplay;
     private int max = 10;
     private int turn = 1;
     private int score = 0;
@@ -60,6 +76,9 @@ public class MainProg {
         allPlayers = new DefaultListModel<>();
         playerList.setModel(allPlayers);
         playerTable.setModel(model);
+        foodTable.setModel(foodModel);
+        drinksTable.setModel(drinksModel);
+        playerOrder.setModel(orderModel);
 
         addNewButton.addActionListener(e -> {
             if (playerCount < 8) {
@@ -192,6 +211,135 @@ public class MainProg {
             mainName.setText("Welcome to Birch Bowling");
 
         });
+
+        orderButton.addActionListener(e -> {
+            OpenCafe();
+        });
+        addFood.addActionListener(e -> {
+            int index = foodTable.getSelectedRow();
+            if (index > -1) {
+                Object name = foodTable.getValueAt(index, 0);
+                Object price = foodTable.getValueAt(index, 1);
+                Object[] toStore = {name, price};
+                orderModel.addRow(toStore);
+                AddToOrderTotal();
+            }
+        });
+
+        addDrink.addActionListener(e -> {
+            int index = drinksTable.getSelectedRow();
+            if (index > -1) {
+                Object name = drinksTable.getValueAt(index, 0);
+                Object price = drinksModel.getValueAt(index, 1);
+                Object[] toStore = {name, price};
+                orderModel.addRow(toStore);
+                AddToOrderTotal();
+            }
+        });
+
+        clearOrderButton.addActionListener(e -> {
+            orderModel.setRowCount(0);
+            orderTotal.setText("£0");
+        });
+        removeSelectedButton1.addActionListener(e -> {
+            int targetRow = playerOrder.getSelectedRow();
+            if (targetRow > -1){
+                orderModel.removeRow(targetRow);
+                orderTotal.setText("£0");
+                OrderTotal();
+            }
+        });
+        cancelOrderButton.addActionListener(e -> {
+            ResetCafe();
+        });
+        placeOrderButton.addActionListener(e -> {
+            ProcessOrder();
+        });
+
+    }
+
+    private void ProcessOrder() {
+        Player player = players.players.get(currentPlayer);
+        String id = player.getPlayerID() + player.orders().getSize();
+        int orderSize = playerOrder.getRowCount();
+        String[] items = new String[orderSize];
+        String[] prices = new String[orderSize];
+        for (int i = 0; i < orderSize; i++){
+            items[i] = "" + playerOrder.getValueAt(i, 0);
+            prices[i] = "" + playerOrder.getValueAt(i, 1);
+        }
+        player.orders().addOrder(new Order(id, items, prices));
+        System.out.println(player.orders().getOrders());
+        JOptionPane.showMessageDialog(null,
+                "Order number for " + player.getPlayerName() + " is: " + id
+                        + ", and will be delivered shortly to lane " + player.getLane() + ".");
+        ResetCafe();
+    }
+
+    private void ResetCafe() {
+        orderModel.setRowCount(0);
+        drinksModel.setRowCount(0);
+        foodModel.setRowCount(0);
+        cafePanel.setVisible(false);
+        runGame.setVisible(true);
+    }
+
+    private void OrderTotal() {
+        int rowCount = orderModel.getRowCount();
+        for (int i = 0; i<rowCount; i++) {
+            double overall = Double.parseDouble(orderTotal.getText().substring(1));
+            double rowPrice = Double.parseDouble(((playerOrder.getValueAt(i, 1).toString()).substring(1)));
+            overall = overall + rowPrice;
+            String toStore = String.format("%.2f", overall);
+            orderTotal.setText("£" + toStore);
+        }
+    }
+
+    private void AddToOrderTotal() {
+        int rowCount = orderModel.getRowCount();
+        double overall = Double.parseDouble(orderTotal.getText().substring(1));
+            double rowPrice = Double.parseDouble(((playerOrder.getValueAt(rowCount-1, 1).toString()).substring(1)));
+            overall = overall + rowPrice;
+            String toStore = String.format("%.2f", overall);
+            orderTotal.setText("£" + toStore);
+    }
+
+    private void OpenCafe() {
+        orderTotal.setText("£0");
+
+        if (foodModel.getColumnCount() == 0){
+            foodModel.addColumn("Item");
+            foodModel.addColumn("Price");
+        }
+        if (drinksModel.getColumnCount() == 0){
+            drinksModel.addColumn("Item");
+            drinksModel.addColumn("Price");
+        }
+        if (orderModel.getColumnCount() == 0){
+            orderModel.addColumn("Individual Items");
+            orderModel.addColumn("Individual Prices");
+        }
+
+        AddMenu();
+
+        cafePanel.setVisible(true);
+        runGame.setVisible(false);
+    }
+
+    private void AddMenu() {
+        Food food = new Food();
+        Drinks drink = new Drinks();
+        for (int i = 0; i < 7; i++){
+            Food fItem = food.FoodMenu(i);
+            Drinks dItem = drink.DrinksMenu(i);
+
+            String[] fData = {fItem.getProductName(),"" + fItem.getProductPrice()};
+            String[] dData = {dItem.getProductName(),"" + dItem.getProductPrice()};
+
+            foodModel.addRow(fData);
+            drinksModel.addRow(dData);
+
+        }
     }
 
     private void resetModel() {
@@ -252,6 +400,8 @@ public class MainProg {
                     MainPanel.revalidate();
                     MainPanel.repaint();
                     GameSetup();
+                    String currentPlayerName = (players.players.get(0).getPlayerName());
+                    currentPlayerDisplay.setText(currentPlayerName + "'s turn.");
                     playerTable.setSelectionBackground(Color.CYAN);
                     playerTable.setRowSelectionInterval(0, 0);
 
@@ -335,7 +485,7 @@ public class MainProg {
     private void ScoreHandler(int score1, int score2, String storeScore ,Player player) {
 
             if (currentFrame != 1) {
-                String lastScore = player.getScore().getScores().get(currentFrame - 1);
+                String lastScore = player.score().getScores().get(currentFrame - 1);
                 if (lastScore.contains("/")) {
                     score1 = score1 * 2;
                 }
@@ -347,16 +497,16 @@ public class MainProg {
             int overallScore = player.getOverallScore();
             player.setOverallScore(overallScore + score1 + score2);
             overallScore = player.getOverallScore();
-            player.getScore().getScores().set(currentFrame, storeScore);
+            player.score().getScores().set(currentFrame, storeScore);
             model.setValueAt(storeScore, currentPlayer, currentFrame);
             String overallString = "" + overallScore;
             model.setValueAt(overallString, currentPlayer, playerTable.getColumnCount() - 1);
         }
 
     private void StrikeHandle(Player player, int score1, int score2){
-        String current = player.getScore().getScores().get(currentFrame);
-        String lastframe1 = player.getScore().getScores().get(currentFrame-1);
-        String lastframe2 = player.getScore().getScores().get(currentFrame-2);
+        String current = player.score().getScores().get(currentFrame);
+        String lastframe1 = player.score().getScores().get(currentFrame-1);
+        String lastframe2 = player.score().getScores().get(currentFrame-2);
         int overall = player.getOverallScore();
 
         if (lastframe1.contains("X")&&lastframe2.contains("X")){
@@ -371,7 +521,7 @@ public class MainProg {
         int throw1 = score1;
         int throw2 = score2;
         int overall = player.getOverallScore();
-        String frame9 = player.getScore().getScores().get(currentFrame-1);
+        String frame9 = player.score().getScores().get(currentFrame-1);
 
         if (frame9.contains("X")){overall = overall + throw1 + throw2;}
         if (frame9.contains("/")){overall = overall + throw1;}
@@ -383,16 +533,16 @@ public class MainProg {
     private String[] SetRowData(Player player){
         String name = player.getPlayerName();
         String overall = "" + player.getOverallScore();
-        String frame0 = player.getScore().getScores().get(0);
-        String frame1 = player.getScore().getScores().get(1);
-        String frame2 = player.getScore().getScores().get(2);
-        String frame3 = player.getScore().getScores().get(3);
-        String frame4 = player.getScore().getScores().get(4);
-        String frame5 = player.getScore().getScores().get(5);
-        String frame6 = player.getScore().getScores().get(6);
-        String frame7 = player.getScore().getScores().get(7);
-        String frame8 = player.getScore().getScores().get(8);
-        String frame9 = player.getScore().getScores().get(9);
+        String frame0 = player.score().getScores().get(0);
+        String frame1 = player.score().getScores().get(1);
+        String frame2 = player.score().getScores().get(2);
+        String frame3 = player.score().getScores().get(3);
+        String frame4 = player.score().getScores().get(4);
+        String frame5 = player.score().getScores().get(5);
+        String frame6 = player.score().getScores().get(6);
+        String frame7 = player.score().getScores().get(7);
+        String frame8 = player.score().getScores().get(8);
+        String frame9 = player.score().getScores().get(9);
 
         String data[] = {name, frame0, frame1, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, overall};
         return data;
@@ -481,6 +631,8 @@ public class MainProg {
 
             }
             playerTable.setSelectionBackground(Color.CYAN);
+        String currentPlayerName = (players.players.get(currentPlayer).getPlayerName());
+        currentPlayerDisplay.setText(currentPlayerName + "'s turn.");
             playerTable.setRowSelectionInterval(currentPlayer, currentPlayer);
 
         }

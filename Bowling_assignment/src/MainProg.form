@@ -28,6 +28,7 @@
               <component id="f8199" class="javax.swing.JLabel" binding="mainName">
                 <constraints/>
                 <properties>
+                  <font name="Arial Black"/>
                   <text value="Welcome to Birch Bowling"/>
                 </properties>
               </component>
@@ -163,7 +164,15 @@
             <constraints border-constraint="North"/>
             <properties/>
             <border type="none"/>
-            <children/>
+            <children>
+              <component id="c77db" class="javax.swing.JLabel" binding="currentPlayerDisplay">
+                <constraints/>
+                <properties>
+                  <font name="Arial Black"/>
+                  <text value="Label"/>
+                </properties>
+              </component>
+            </children>
           </grid>
           <grid id="bbb48" binding="runSouth" layout-manager="BorderLayout" hgap="0" vgap="0">
             <constraints border-constraint="South"/>
@@ -237,10 +246,179 @@
                 <children>
                   <component id="92f6c" class="javax.swing.JTable" binding="playerTable">
                     <constraints/>
+                    <properties>
+                      <enabled value="true"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="23139" binding="cafePanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints/>
+        <properties>
+          <preferredSize width="1200" height="500"/>
+          <visible value="false"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="b071e" binding="cafeNorth" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints border-constraint="North"/>
+            <properties>
+              <opaque value="false"/>
+              <preferredSize width="150" height="80"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="33bfb" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="Ready for some Birch Brunch?"/>
+                </properties>
+              </component>
+              <hspacer id="eb9d6">
+                <constraints/>
+              </hspacer>
+              <vspacer id="5f2bf">
+                <constraints/>
+              </vspacer>
+            </children>
+          </grid>
+          <grid id="88bef" binding="cafeWest" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints border-constraint="West"/>
+            <properties>
+              <preferredSize width="350" height="467"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="43cd4" class="javax.swing.JLabel">
+                <constraints border-constraint="North"/>
+                <properties>
+                  <text value="Food"/>
+                </properties>
+              </component>
+              <component id="d5103" class="javax.swing.JButton" binding="addFood">
+                <constraints border-constraint="South"/>
+                <properties>
+                  <label value="Add Selection"/>
+                  <text value="Add Selection"/>
+                </properties>
+              </component>
+              <scrollpane id="35968">
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="8fd0b" class="javax.swing.JTable" binding="foodTable">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="200" height="300"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+          <grid id="4071e" binding="cafeEast" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints border-constraint="East"/>
+            <properties>
+              <preferredSize width="350" height="467"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="fc4cf" class="javax.swing.JLabel">
+                <constraints border-constraint="North"/>
+                <properties>
+                  <text value="Drinks"/>
+                </properties>
+              </component>
+              <component id="c759f" class="javax.swing.JButton" binding="addDrink">
+                <constraints border-constraint="South"/>
+                <properties>
+                  <text value="Add Drink"/>
+                </properties>
+              </component>
+              <scrollpane id="ea264">
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="9fa2" class="javax.swing.JTable" binding="drinksTable">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="200" height="300"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+          <grid id="a6ebc" binding="cafeCentre" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <preferredSize width="200" height="42"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <scrollpane id="a72d4">
+                <constraints border-constraint="North"/>
+                <properties>
+                  <preferredSize width="453" height="350"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="e5dc8" class="javax.swing.JTable" binding="playerOrder">
+                    <constraints/>
                     <properties/>
                   </component>
                 </children>
               </scrollpane>
+              <grid id="4928d" binding="cafeSouth" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints border-constraint="South"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <grid id="e0bd3" binding="cafeCentreButtons" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                    <constraints border-constraint="South"/>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="90d9" class="javax.swing.JButton" binding="cancelOrderButton">
+                        <constraints/>
+                        <properties>
+                          <text value="Cancel"/>
+                        </properties>
+                      </component>
+                      <component id="e3c3f" class="javax.swing.JButton" binding="clearOrderButton" default-binding="true">
+                        <constraints/>
+                        <properties>
+                          <text value="Clear Order"/>
+                        </properties>
+                      </component>
+                      <component id="55899" class="javax.swing.JButton" binding="removeSelectedButton1" default-binding="true">
+                        <constraints/>
+                        <properties>
+                          <text value="Remove Selected"/>
+                        </properties>
+                      </component>
+                      <component id="c9ad0" class="javax.swing.JButton" binding="placeOrderButton" default-binding="true">
+                        <constraints/>
+                        <properties>
+                          <text value="Place Order"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <component id="9f044" class="javax.swing.JLabel" binding="orderTotal">
+                    <constraints border-constraint="Center"/>
+                    <properties>
+                      <text value="£0"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
             </children>
           </grid>
         </children>

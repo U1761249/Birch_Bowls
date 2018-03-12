@@ -1,8 +1,10 @@
+import java.util.Arrays;
+
 public class Order {
 
 	private String orderID;
 	private String[] items;
-	private float[] prices;
+	private String[] prices;
 
 	public String getOrderID() { return orderID; }
 
@@ -12,7 +14,22 @@ public class Order {
 
 	public void setItems(String[] items) { this.items = items; }
 
-	public float[] getPrices() { return prices; }
+	public String[] getPrices() { return prices; }
 
-	public void setPrices(float[] prices) { this.prices = prices; }
+	public void setPrices(String[] prices) { this.prices = prices; }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderID='" + orderID + '\'' +
+                ", items=" + Arrays.toString(items) +
+                ", prices=" + Arrays.toString(prices) +
+                '}';
+    }
+
+    public Order(String orderID, String[] items, String[] prices) {
+        this.orderID = orderID;
+        this.items = items;
+        this.prices = prices;
+    }
 }

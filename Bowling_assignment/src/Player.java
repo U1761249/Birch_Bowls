@@ -3,6 +3,7 @@ public class Player {
 	private String playerID;
 	private String playerName;
 	private Scoresheet score; //composition. Player "Has-a" Scoresheet.
+	private Orders orderList; //composition. Player "Has-a" order list.
 	private int overallScore;
 	private int lane;
 
@@ -10,7 +11,9 @@ public class Player {
 
 	public String getPlayerName() { return playerName; }
 
-	public Scoresheet getScore() { return this.score;}
+	public Scoresheet score() { return this.score;}
+
+	public Orders orders() { return this.orderList;}
 
 	public int getOverallScore() { return overallScore; }
 
@@ -24,6 +27,7 @@ public class Player {
 		this.playerID = playerID;
 		this.playerName = playerName;
 		this.score = new Scoresheet();
+		this.orderList = new Orders();
 		this.overallScore = overallScore;
 		this.lane = lane;
 	}
