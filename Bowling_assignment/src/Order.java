@@ -6,6 +6,9 @@ public class Order {
 	private String[] items;
 	private String[] prices;
 
+
+	//Get and set infrastructure that can be used to process the order in a genuine use case.
+
 	public String getOrderID() { return orderID; }
 
 	public void setOrderID(String orderID) { this.orderID = orderID; }

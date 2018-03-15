@@ -2,13 +2,13 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.*;
 
 public class MainProg {
+
+    //Source and ID of the colour scheme used.
 
     //http://colorschemedesigner.com/csd-3.5/
     //4W52Pw0w0w0w0
@@ -31,7 +31,9 @@ public class MainProg {
     private JPanel runNorth;
     private JPanel runSouth;
     private JPanel runCentre;
-    private String TABLE_HEADINGS[] = new String[] {"Name", "Frame 1", "Frame 2", "Frame 3", "Frame 4", "Frame 5", "Frame 6", "Frame 7", "Frame 8", "Frame 9", "Frame 10", "Overall"};
+    private String TABLE_HEADINGS[] = new String[]
+            {"Name", "Frame 1", "Frame 2", "Frame 3", "Frame 4", "Frame 5",
+                    "Frame 6", "Frame 7", "Frame 8", "Frame 9", "Frame 10", "Overall"};
     private Players players = new Players();
     private DefaultTableModel model = new DefaultTableModel();
     private DefaultTableModel foodModel = new DefaultTableModel();
@@ -61,7 +63,7 @@ public class MainProg {
     private JButton cancelOrderButton;
     private JButton clearOrderButton;
     private JTable playerOrder;
-    private JButton removeSelectedButton1;
+    private JButton removeOrder;
     private JButton placeOrderButton;
     private JLabel orderTotal;
     private JPanel cafeSouth;
@@ -90,9 +92,9 @@ public class MainProg {
         playerOrder.setModel(orderModel);
 
         addNewButton.addActionListener(e -> {
-            if (playerCount < 8) {
+            if (playerCount < 8) { //Don't overfill a lane.
                 String name = JOptionPane.showInputDialog("Enter a player Name: ");
-                if (name.length() == 0) {
+                if (name.length() == 0) { //Must enter a name.
                     JOptionPane.showMessageDialog(null, "Enter a name.");
                 } else {
                     int count = 1;
@@ -133,6 +135,7 @@ public class MainProg {
         laneNo.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
+                //Check the user typed input, and set it to 1 character in length.
                 super.keyTyped(e);
                 String c = laneNo.getText();
                 if (c.length() > 0) {
@@ -143,33 +146,38 @@ public class MainProg {
 
         bowlButton.addActionListener(e -> {
             if (currentFrame != 10){
-            if (turn == 1) {
-                score = BowlBall(max);
-                lastHits.setText("Last hit: " + score);
-                if (score == 10) {
-                    JOptionPane.showMessageDialog(null, "STRIKE!");
-                    Strike();
+
+                //Functions for normal frame functionality.
+                if (turn == 1) {
+                    score = BowlBall(max);
+                    lastHits.setText("Last hit: " + score);
+                    if (score == 10) {
+                        JOptionPane.showMessageDialog(null, "STRIKE!");
+                        Strike();
+                        nextPlayer();
+                    } else {
+                        turn++;
+                    }
+                }
+                else {
+
+                    max = max - score;
+                    int score2 = BowlBall(max);
+                    lastHits.setText("Last hit: " + score2);
+                    if (score + score2 == 10) {
+                        JOptionPane.showMessageDialog(null, "SPARE!");
+                        Spare(score, score2);
+                    } else {
+                        int total = score + score2;
+                        JOptionPane.showMessageDialog(null, "Hit " + total + " of 10.");
+                        UpdateScore(score, score2);
+                    }
+                    score = 0;
+                    turn = 1;
+                    max = 10;
                     nextPlayer();
-                } else {
-                    turn++;
-                }
-            } else {
-                max = max - score;
-                int score2 = BowlBall(max);
-                lastHits.setText("Last hit: " + score2);
-                if (score + score2 == 10) {
-                    JOptionPane.showMessageDialog(null, "SPARE!");
-                    Spare(score, score2);
-                } else {
-                    int total = score + score2;
-                    JOptionPane.showMessageDialog(null, "Hit " + total + " of 10.");
-                    UpdateScore(score, score2);
-                }
-                score = 0;
-                turn = 1;
-                max = 10;
-                nextPlayer();
             }}
+            //10th frame functionality.
             else{Bowl10();}
         });
 
@@ -197,7 +205,7 @@ public class MainProg {
             resetModel();
             playerCount = allPlayers.size();
             boolean doShuffle = true;
-            String[] options = {"Shuffle","This order"};
+            String[] options = {"Shuffle","This order"}; //Allow player order to be shuffled, or in score descending order.
             int shuffle = JOptionPane.showOptionDialog(null,
                     "Do you want to play this order, or a random order?",
                     "Choose an option",
@@ -213,6 +221,7 @@ public class MainProg {
         });
 
         newPlayers.addActionListener(e -> {
+            //Reset initial screen for new players.
             allPlayers.clear();
             playerCount = 0;
             resetModel();
@@ -226,9 +235,10 @@ public class MainProg {
         orderButton.addActionListener(e -> {
             OpenCafe();
         });
+
         addFood.addActionListener(e -> {
             int index = foodTable.getSelectedRow();
-            if (index > -1) {
+            if (index > -1) { //Check that an item is selected.
                 Object name = foodTable.getValueAt(index, 0);
                 Object price = foodTable.getValueAt(index, 1);
                 Object[] toStore = {name, price};
@@ -239,7 +249,7 @@ public class MainProg {
 
         addDrink.addActionListener(e -> {
             int index = drinksTable.getSelectedRow();
-            if (index > -1) {
+            if (index > -1) { //Check that an item is selected.
                 Object name = drinksTable.getValueAt(index, 0);
                 Object price = drinksModel.getValueAt(index, 1);
                 Object[] toStore = {name, price};
@@ -249,10 +259,13 @@ public class MainProg {
         });
 
         clearOrderButton.addActionListener(e -> {
+            //Reset the order to its empty state.
             orderModel.setRowCount(0);
             orderTotal.setText("£0");
         });
-        removeSelectedButton1.addActionListener(e -> {
+
+        removeOrder.addActionListener(e -> {
+            //Remove selected item from order.
             int targetRow = playerOrder.getSelectedRow();
             if (targetRow > -1){
                 orderModel.removeRow(targetRow);
@@ -260,152 +273,60 @@ public class MainProg {
                 OrderTotal();
             }
         });
+
         cancelOrderButton.addActionListener(e -> {
             ResetCafe();
         });
+
         placeOrderButton.addActionListener(e -> {
             ProcessOrder();
         });
 
     }
 
+    //Setting the Player data.
+
     private String NameCheck(String name, int count, int length) {
+        //Adds a number to a name to make it unique, EG Player and Player(1).
         for(int i = 0; i < allPlayers.size(); i++){
             if (allPlayers.contains(name)){
                 if (name.length() > length){
+                    //If input name has already been altered.
                     name = name.substring(0, name.length() - 3);
                 }
             name = name + "(" + count + ")";
             count ++;
             }
         }
-        System.out.println(name);
         return name;
 
     }
 
-    private void ProcessOrder() {
-        Player player = players.players.get(currentPlayer);
-        String id = player.getPlayerID() + player.orders().getSize();
-        int orderSize = playerOrder.getRowCount();
-        String[] items = new String[orderSize];
-        String[] prices = new String[orderSize];
-        for (int i = 0; i < orderSize; i++){
-            items[i] = "" + playerOrder.getValueAt(i, 0);
-            prices[i] = "" + playerOrder.getValueAt(i, 1);
-        }
-        player.orders().addOrder(new Order(id, items, prices));
-        System.out.println(player.orders().getOrders());
-        JOptionPane.showMessageDialog(null,
-                "Order number for " + player.getPlayerName() + " is: " + id
-                        + ", and will be delivered shortly to lane " + player.getLane() + ".");
-        ResetCafe();
+    private String[] SetRowData(Player player){
+        String name = player.getPlayerName();
+        String overall = "" + player.getOverallScore();
+        String frame0 = player.score().getScores().get(0);
+        String frame1 = player.score().getScores().get(1);
+        String frame2 = player.score().getScores().get(2);
+        String frame3 = player.score().getScores().get(3);
+        String frame4 = player.score().getScores().get(4);
+        String frame5 = player.score().getScores().get(5);
+        String frame6 = player.score().getScores().get(6);
+        String frame7 = player.score().getScores().get(7);
+        String frame8 = player.score().getScores().get(8);
+        String frame9 = player.score().getScores().get(9);
+
+        String data[] = {name, frame0, frame1, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, overall};
+        return data;
     }
 
-    private void ResetCafe() {
-        orderModel.setRowCount(0);
-        drinksModel.setRowCount(0);
-        foodModel.setRowCount(0);
-        cafePanel.setVisible(false);
-        runGame.setVisible(true);
+    private void PlayerSetup(Player player){
+        String[] data = SetRowData(player);
+        model.addRow(data);
+
     }
 
-    private void OrderTotal() {
-        int rowCount = orderModel.getRowCount();
-        for (int i = 0; i<rowCount; i++) {
-            double overall = Double.parseDouble(orderTotal.getText().substring(1));
-            double rowPrice = Double.parseDouble(((playerOrder.getValueAt(i, 1).toString()).substring(1)));
-            overall = overall + rowPrice;
-            String toStore = String.format("%.2f", overall);
-            orderTotal.setText("£" + toStore);
-        }
-    }
-
-    private void AddToOrderTotal() {
-        int rowCount = orderModel.getRowCount();
-        double overall = Double.parseDouble(orderTotal.getText().substring(1));
-            double rowPrice = Double.parseDouble(((playerOrder.getValueAt(rowCount-1, 1).toString()).substring(1)));
-            overall = overall + rowPrice;
-            String toStore = String.format("%.2f", overall);
-            orderTotal.setText("£" + toStore);
-    }
-
-    private void OpenCafe() {
-        orderTotal.setText("£0");
-        orderSP.getViewport().setBackground( new Color( 210,95,210 ));
-
-        if (foodModel.getColumnCount() == 0){
-            foodModel.addColumn("Item");
-            foodModel.addColumn("Price");
-        }
-        if (drinksModel.getColumnCount() == 0){
-            drinksModel.addColumn("Item");
-            drinksModel.addColumn("Price");
-        }
-        if (orderModel.getColumnCount() == 0){
-            orderModel.addColumn("Individual Items");
-            orderModel.addColumn("Individual Prices");
-        }
-
-        AddMenu();
-
-        cafePanel.setVisible(true);
-        runGame.setVisible(false);
-    }
-
-    private void AddMenu() {
-        drinkSP.getViewport().setBackground( new Color( 170, 0, 210 ));
-        JTableHeader header1 = drinksTable.getTableHeader();
-        header1.setBackground(new Color( 170, 0, 210));
-        header1.setForeground(Color.white);
-        foodSP.getViewport().setBackground( new Color( 170, 0, 210 ));
-        JTableHeader header2 = foodTable.getTableHeader();
-        header2.setBackground(new Color( 170, 0, 210 ));
-        header2.setForeground(Color.white);
-        JTableHeader oTable = playerOrder.getTableHeader();
-        oTable.setBackground(new Color(170, 0, 210));
-        oTable.setForeground(Color.white);
-        Food food = new Food();
-        Drinks drink = new Drinks();
-        for (int i = 0; i < 7; i++){
-            Food fItem = food.FoodMenu(i);
-            Drinks dItem = drink.DrinksMenu(i);
-
-            String[] fData = {fItem.getProductName(),"" + fItem.getProductPrice()};
-            String[] dData = {dItem.getProductName(),"" + dItem.getProductPrice()};
-
-            foodModel.addRow(fData);
-            drinksModel.addRow(dData);
-
-        }
-    }
-
-    private void resetModel() {
-        if (model.getRowCount() > 0) {
-            for (int i = model.getRowCount() - 1; i > -1; i--) {
-                model.removeRow(i);
-            }
-        }
-    }
-
-    private void resetGame(boolean doShuffle) {
-        for (int i = 0; i < playerCount; i++){
-            String name = allPlayers.getElementAt(i);
-            name = name.substring(6);
-            allPlayers.setElementAt(name, i);
-        }
-
-        if (doShuffle){
-            ArrayList<String> tempList = new ArrayList<>();
-            for (int i = 0; i < playerCount; i++){
-                tempList.add(allPlayers.getElementAt(i));
-            }
-            Collections.shuffle(tempList);
-            allPlayers.clear();
-            for (String name : tempList){allPlayers.addElement(name);}
-        }
-        InitializeGame();
-    }
+    //Set up the game.
 
     private void InitializeGame() {
         lastHits.setText("No pins have been struck.");
@@ -452,57 +373,53 @@ public class MainProg {
         }
     }
 
-    private void Display() {
-
-        while (players.getSize() != 0) {
-            Player player = players.players.get(0);
-            int overall = player.getOverallScore();
-            String toStore;
-            if (overall < 100){toStore = "0" +player.getOverallScore() + "   "; }
-            else{toStore = "" + player.getOverallScore() + "   ";}
-            toStore = toStore + player.getPlayerName();
-            allPlayers.addElement(toStore);
-            players.players.remove(0);
-        }
-
-        Sort();
-    }
-
-    private void Sort() {
-        int toSort = allPlayers.size()-1;
-        for (int i = 0; i < allPlayers.size(); i++){
-            for (int j = 0; j < toSort; j++){
-                String sLine1 = allPlayers.get(j);
-                String sLine2 = allPlayers.get(j+1);
-                int line1 = Integer.parseInt(sLine1.substring(0,3));
-                int line2 = Integer.parseInt(sLine2.substring(0,3));
-
-                if (line1 < line2){
-                    allPlayers.setElementAt(sLine1, j+1);
-                    allPlayers.setElementAt(sLine2, j+0);
-
-                }
-
-            }
-            toSort--;
-        }
-    }
-
-    private int BowlBall(int max){
-        Random rand = new Random();
-        int score = rand.nextInt(max+1);
-        if (score == 0){score = rand.nextInt(max+1);}
-        return( score);
-    }
-
     private void GameSetup(){
         playerSP.getViewport().setBackground( new Color( 210,95,210 ));
         if (model.getColumnCount() == 0) {
             for (String title : TABLE_HEADINGS){
+                //Add a column for each title, if the table hasn't been initialised already (First game only).
                 model.addColumn(title);
             }
         }
+        //Add each player to the table.
         players.players.forEach(player -> PlayerSetup(player));
+    }
+
+    private void resetModel() {
+        if (model.getRowCount() > 0) {
+            for (int i = model.getRowCount() - 1; i > -1; i--) {
+                model.removeRow(i);
+            }
+        }
+    }
+
+    private void resetGame(boolean doShuffle) {
+        for (int i = 0; i < playerCount; i++){
+            String name = allPlayers.getElementAt(i);
+            name = name.substring(6);
+            allPlayers.setElementAt(name, i);
+        }
+
+        if (doShuffle){
+            ArrayList<String> tempList = new ArrayList<>();
+            for (int i = 0; i < playerCount; i++){
+                tempList.add(allPlayers.getElementAt(i));
+            }
+            Collections.shuffle(tempList); //Shuffle the order of the players.
+            allPlayers.clear();
+            for (String name : tempList){allPlayers.addElement(name);}
+        }
+        InitializeGame();
+    }
+
+    //Play the game.
+
+    private int BowlBall(int max){
+        Random rand = new Random();
+        int score = rand.nextInt(max+1);
+        if (score == 0){score = rand.nextInt(max+1);} //Reduce the frequency of misses.
+        // More likely to miss the fewer pins there are remaining.
+        return( score);
     }
 
     private void Strike(){
@@ -525,7 +442,7 @@ public class MainProg {
 
     private void ScoreHandler(int score1, int score2, String storeScore ,Player player) {
 
-            if (currentFrame != 1) {
+            if (currentFrame != 1) { //Prevent Index out of Range exception.
                 String lastScore = player.score().getScores().get(currentFrame - 1);
                 if (lastScore.contains("/")) {
                     score1 = score1 * 2;
@@ -558,6 +475,7 @@ public class MainProg {
         }
     }
 
+    //Differs from original for last frame functionality.
     private void ScoreHandle2(Player player, int score1, int score2){
         int throw1 = score1;
         int throw2 = score2;
@@ -568,30 +486,6 @@ public class MainProg {
         if (frame9.contains("/")){overall = overall + throw1;}
 
         player.setOverallScore(overall);
-
-    }
-
-    private String[] SetRowData(Player player){
-        String name = player.getPlayerName();
-        String overall = "" + player.getOverallScore();
-        String frame0 = player.score().getScores().get(0);
-        String frame1 = player.score().getScores().get(1);
-        String frame2 = player.score().getScores().get(2);
-        String frame3 = player.score().getScores().get(3);
-        String frame4 = player.score().getScores().get(4);
-        String frame5 = player.score().getScores().get(5);
-        String frame6 = player.score().getScores().get(6);
-        String frame7 = player.score().getScores().get(7);
-        String frame8 = player.score().getScores().get(8);
-        String frame9 = player.score().getScores().get(9);
-
-        String data[] = {name, frame0, frame1, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, overall};
-        return data;
-    }
-
-    private void PlayerSetup(Player player){
-        String[] data = SetRowData(player);
-        model.addRow(data);
 
     }
 
@@ -640,7 +534,7 @@ public class MainProg {
                     nextPlayer();}
         }
 
-       else if (turn == 3 && hasThird){
+       else if (turn == 3 && hasThird){ //Only has third throw if the player got a Strike or a Spare.
             score3 = BowlBall(max);
             lastHits.setText("Last hit: " + score3);
             turn = 0;
@@ -662,7 +556,7 @@ public class MainProg {
 
             currentPlayer++;
             int pc = playerTable.getRowCount();
-            pc--;
+            pc--; //One row is for Headers.
 
             if (currentPlayer > pc) {
                 currentPlayer = 0;
@@ -676,6 +570,145 @@ public class MainProg {
             playerTable.setRowSelectionInterval(currentPlayer, currentPlayer);
 
         }
+
+    //Display the Winner.
+
+    private void Display() {
+
+        while (players.getSize() != 0) {
+            Player player = players.players.get(0);
+            int overall = player.getOverallScore();
+            String toStore;
+            if (overall < 100){toStore = "0" +player.getOverallScore() + "   "; }
+            else{toStore = "" + player.getOverallScore() + "   ";}
+            toStore = toStore + player.getPlayerName();
+            allPlayers.addElement(toStore);
+            players.players.remove(0);
+        }
+
+        Sort();
+    }
+
+    private void Sort() { //Bubble sort Players.
+        int toSort = allPlayers.size()-1;
+        for (int i = 0; i < allPlayers.size(); i++){
+            for (int j = 0; j < toSort; j++){
+                String sLine1 = allPlayers.get(j);
+                String sLine2 = allPlayers.get(j+1);
+                //Get the scores for the players.
+                int line1 = Integer.parseInt(sLine1.substring(0,3));
+                int line2 = Integer.parseInt(sLine2.substring(0,3));
+
+                if (line1 < line2){
+                    allPlayers.setElementAt(sLine1, j+1);
+                    allPlayers.setElementAt(sLine2, j+0);
+
+                }
+
+            }
+            toSort--;
+        }
+    }
+
+    //Cafe functionality.
+
+    private void OpenCafe() {
+        orderTotal.setText("£0");
+        orderSP.getViewport().setBackground( new Color( 210,95,210 ));
+
+        if (foodModel.getColumnCount() == 0){
+            foodModel.addColumn("Item");
+            foodModel.addColumn("Price");
+        }
+        if (drinksModel.getColumnCount() == 0){
+            drinksModel.addColumn("Item");
+            drinksModel.addColumn("Price");
+        }
+        if (orderModel.getColumnCount() == 0){
+            orderModel.addColumn("Individual Items");
+            orderModel.addColumn("Individual Prices");
+        }
+
+        AddMenu();
+
+        cafePanel.setVisible(true);
+        runGame.setVisible(false);
+    }
+
+    private void ProcessOrder() {
+        Player player = players.players.get(currentPlayer);
+        String id = player.getPlayerID() + player.orders().getSize();
+        int orderSize = playerOrder.getRowCount();
+        String[] items = new String[orderSize];
+        String[] prices = new String[orderSize];
+        for (int i = 0; i < orderSize; i++){
+            items[i] = "" + playerOrder.getValueAt(i, 0);
+            prices[i] = "" + playerOrder.getValueAt(i, 1);
+        }
+        player.orders().addOrder(new Order(id, items, prices)); //Add new order to the players Order array.
+        JOptionPane.showMessageDialog(null,
+                "Order number for " + player.getPlayerName() + " is: " + id
+                        + ", and will be delivered shortly to lane " + player.getLane() + ".");
+        ResetCafe();
+    }
+
+    private void ResetCafe() {
+        //Delete the data from each table. Also resets the selections.
+        orderModel.setRowCount(0);
+        drinksModel.setRowCount(0);
+        foodModel.setRowCount(0);
+        cafePanel.setVisible(false);
+        runGame.setVisible(true);
+    }
+
+    private void OrderTotal() {
+        int rowCount = orderModel.getRowCount();
+        for (int i = 0; i<rowCount; i++) {
+            double overall = Double.parseDouble(orderTotal.getText().substring(1)); //Remove £ from the string.
+            double rowPrice = Double.parseDouble(((playerOrder.getValueAt(i, 1).toString()).substring(1)));
+            overall = overall + rowPrice;
+            String toStore = String.format("%.2f", overall); //Make format to 2 DP.
+            orderTotal.setText("£" + toStore);
+        }
+    }
+
+    private void AddToOrderTotal() {
+        int rowCount = orderModel.getRowCount();
+        double overall = Double.parseDouble(orderTotal.getText().substring(1)); //Remove £ from the string.
+        double rowPrice = Double.parseDouble(((playerOrder.getValueAt(rowCount-1, 1).toString()).substring(1)));
+        overall = overall + rowPrice;
+        String toStore = String.format("%.2f", overall); //Make format to 2 DP.
+        orderTotal.setText("£" + toStore);
+    }
+
+    private void AddMenu() {
+        drinkSP.getViewport().setBackground( new Color( 170, 0, 210 ));
+        JTableHeader header1 = drinksTable.getTableHeader();
+        header1.setBackground(new Color( 170, 0, 210));
+        header1.setForeground(Color.white);
+        foodSP.getViewport().setBackground( new Color( 170, 0, 210 ));
+        JTableHeader header2 = foodTable.getTableHeader();
+        header2.setBackground(new Color( 170, 0, 210 ));
+        header2.setForeground(Color.white);
+        JTableHeader oTable = playerOrder.getTableHeader();
+        oTable.setBackground(new Color(170, 0, 210));
+        oTable.setForeground(Color.white);
+        Food food = new Food();
+        Drinks drink = new Drinks();
+        for (int i = 0; i < 7; i++){
+            Food fItem = food.FoodMenu(i);
+            Drinks dItem = drink.DrinksMenu(i);
+
+            String[] fData = {fItem.getProductName(),"" + fItem.getProductPrice()};
+            String[] dData = {dItem.getProductName(),"" + dItem.getProductPrice()};
+
+            foodModel.addRow(fData);
+            drinksModel.addRow(dData);
+
+        }
+    }
+
+
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Birch_Bowling");

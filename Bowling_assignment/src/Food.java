@@ -10,6 +10,8 @@ public class Food extends Refreshments{
 
     public Food (){}
 
+
+    //Define items on the food menu and their prices.
     public Food FoodMenu(int i){
         Food f1 = new Food("Hot Dog", "£3.30");
         Food f2 = new Food("Beef Burger", "£4.20");

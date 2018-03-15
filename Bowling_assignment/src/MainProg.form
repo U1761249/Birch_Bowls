@@ -215,7 +215,7 @@
               <grid id="d0745" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints border-constraint="West"/>
                 <properties>
-                  <background color="-2990126"/>
+                  <background color="-9699220"/>
                 </properties>
                 <border type="none"/>
                 <children>
@@ -392,7 +392,7 @@
                           <text value="Clear Order"/>
                         </properties>
                       </component>
-                      <component id="55899" class="javax.swing.JButton" binding="removeSelectedButton1" default-binding="true">
+                      <component id="55899" class="javax.swing.JButton" binding="removeOrder">
                         <constraints/>
                         <properties>
                           <background color="-12610862"/>

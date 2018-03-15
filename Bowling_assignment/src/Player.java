@@ -21,8 +21,6 @@ public class Player {
 
 	public int getLane() { return lane; }
 
-	public void setLane(int lane) { this.lane = lane; }
-
 	public Player(String playerID, String playerName, int overallScore, int lane) {
 		this.playerID = playerID;
 		this.playerName = playerName;

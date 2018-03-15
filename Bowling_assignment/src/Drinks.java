@@ -10,6 +10,8 @@ public class Drinks extends Refreshments {
 
     public Drinks (){}
 
+
+    //Define items on the drinks menu and their prices.
     public Drinks DrinksMenu(int i){
         Drinks d1 = new Drinks("Tea", "£2.30");
         Drinks d2 = new Drinks("Coffee", "£2.40");
