@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +9,10 @@ import java.awt.event.KeyEvent;
 import java.util.*;
 
 public class MainProg {
+
+    //http://colorschemedesigner.com/csd-3.5/
+    //4W52Pw0w0w0w0
+
     private DefaultListModel<String> allPlayers;
     private int playerCount = 0;
     private JPanel newGame;
@@ -37,7 +42,7 @@ public class MainProg {
     private JButton bowlButton;
     private JButton endButton;
     private JPanel centreNorth;
-    private JTextField lastHits;
+    private JLabel lastHits;
     private JPanel setupSouthStart;
     private JPanel setupSouthRepeat;
     private JButton samePlayers;
@@ -45,10 +50,10 @@ public class MainProg {
     private JButton quit;
     private JPanel cafePanel;
     private JPanel cafeNorth;
-    private JPanel cafeWest;
+    private JPanel foodMenu;
     private JButton addFood;
     private JTable foodTable;
-    private JPanel cafeEast;
+    private JPanel drinksMenu;
     private JButton addDrink;
     private JTable drinksTable;
     private JPanel cafeCentre;
@@ -61,6 +66,10 @@ public class MainProg {
     private JLabel orderTotal;
     private JPanel cafeSouth;
     private JLabel currentPlayerDisplay;
+    private JScrollPane playerSP;
+    private JScrollPane orderSP;
+    private JScrollPane drinkSP;
+    private JScrollPane foodSP;
     private int max = 10;
     private int turn = 1;
     private int score = 0;
@@ -86,6 +95,8 @@ public class MainProg {
                 if (name.length() == 0) {
                     JOptionPane.showMessageDialog(null, "Enter a name.");
                 } else {
+                    int count = 1;
+                    name = NameCheck(name, count, name.length());
                     allPlayers.addElement(name);
                     playerCount++;
                 }
@@ -258,6 +269,21 @@ public class MainProg {
 
     }
 
+    private String NameCheck(String name, int count, int length) {
+        for(int i = 0; i < allPlayers.size(); i++){
+            if (allPlayers.contains(name)){
+                if (name.length() > length){
+                    name = name.substring(0, name.length() - 3);
+                }
+            name = name + "(" + count + ")";
+            count ++;
+            }
+        }
+        System.out.println(name);
+        return name;
+
+    }
+
     private void ProcessOrder() {
         Player player = players.players.get(currentPlayer);
         String id = player.getPlayerID() + player.orders().getSize();
@@ -306,6 +332,7 @@ public class MainProg {
 
     private void OpenCafe() {
         orderTotal.setText("£0");
+        orderSP.getViewport().setBackground( new Color( 210,95,210 ));
 
         if (foodModel.getColumnCount() == 0){
             foodModel.addColumn("Item");
@@ -327,6 +354,17 @@ public class MainProg {
     }
 
     private void AddMenu() {
+        drinkSP.getViewport().setBackground( new Color( 170, 0, 210 ));
+        JTableHeader header1 = drinksTable.getTableHeader();
+        header1.setBackground(new Color( 170, 0, 210));
+        header1.setForeground(Color.white);
+        foodSP.getViewport().setBackground( new Color( 170, 0, 210 ));
+        JTableHeader header2 = foodTable.getTableHeader();
+        header2.setBackground(new Color( 170, 0, 210 ));
+        header2.setForeground(Color.white);
+        JTableHeader oTable = playerOrder.getTableHeader();
+        oTable.setBackground(new Color(170, 0, 210));
+        oTable.setForeground(Color.white);
         Food food = new Food();
         Drinks drink = new Drinks();
         for (int i = 0; i < 7; i++){
@@ -375,6 +413,9 @@ public class MainProg {
         bowlButton.setVisible(true);
         currentFrame = 1;
         currentPlayer = 0;
+        JTableHeader header = playerTable.getTableHeader();
+        header.setBackground(new Color( 170, 0, 210 ));
+        header.setForeground(Color.white);
 
         if (laneNo.getText().length() != 1) {
             JOptionPane.showMessageDialog(null, "Enter a lane.");
@@ -402,7 +443,6 @@ public class MainProg {
                     GameSetup();
                     String currentPlayerName = (players.players.get(0).getPlayerName());
                     currentPlayerDisplay.setText(currentPlayerName + "'s turn.");
-                    playerTable.setSelectionBackground(Color.CYAN);
                     playerTable.setRowSelectionInterval(0, 0);
 
                 } else {
@@ -456,6 +496,7 @@ public class MainProg {
     }
 
     private void GameSetup(){
+        playerSP.getViewport().setBackground( new Color( 210,95,210 ));
         if (model.getColumnCount() == 0) {
             for (String title : TABLE_HEADINGS){
                 model.addColumn(title);
@@ -630,7 +671,6 @@ public class MainProg {
                 endButton.setVisible(true);}
 
             }
-            playerTable.setSelectionBackground(Color.CYAN);
         String currentPlayerName = (players.players.get(currentPlayer).getPlayerName());
         currentPlayerDisplay.setText(currentPlayerName + "'s turn.");
             playerTable.setRowSelectionInterval(currentPlayer, currentPlayer);
@@ -638,7 +678,7 @@ public class MainProg {
         }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("MainProg");
+        JFrame frame = new JFrame("Birch_Bowling");
         frame.setContentPane(new MainProg().MainPanel);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
