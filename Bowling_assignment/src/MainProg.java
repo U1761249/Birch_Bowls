@@ -365,11 +365,10 @@ public class MainProg {
                     String currentPlayerName = (players.players.get(0).getPlayerName());
                     currentPlayerDisplay.setText(currentPlayerName + "'s turn.");
                     playerTable.setRowSelectionInterval(0, 0);
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Must include 2 or more players.");
                 }
-            }
+            } else {
+                JOptionPane.showMessageDialog(null, "Must include 2 or more players."); }
+
         }
     }
 
