@@ -183,7 +183,8 @@
         <constraints/>
         <properties>
           <background color="-2990126"/>
-          <preferredSize width="1200" height="200"/>
+          <minimumSize width="417" height="200"/>
+          <preferredSize width="1200" height="250"/>
           <visible value="false"/>
         </properties>
         <border type="none"/>
