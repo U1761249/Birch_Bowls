@@ -1,4 +1,8 @@
+import jdk.nashorn.internal.scripts.JO;
+
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
@@ -180,6 +184,8 @@ public class MainProg {
             //10th frame functionality.
             else{Bowl10();}
         });
+        playerTable.getSelectionModel().addListSelectionListener(event -> // Prevent the user from selecting a row within the player table.
+                playerTable.setRowSelectionInterval(currentPlayer, currentPlayer));
 
         endButton.addActionListener(e -> {
             newGame.setVisible(true);
@@ -259,10 +265,13 @@ public class MainProg {
         });
 
         clearOrderButton.addActionListener(e -> {
-            //Reset the order to its empty state.
-            orderModel.setRowCount(0);
-            orderTotal.setText("£0");
-        });
+                    int clearConfirm = JOptionPane.showConfirmDialog(null,
+                            "Are you sure you want to clear the order?");
+                    if (clearConfirm == 0) {
+                        //Reset the order to its empty state.
+                        orderModel.setRowCount(0);
+                        orderTotal.setText("£0");
+                    }});
 
         removeOrder.addActionListener(e -> {
             //Remove selected item from order.
@@ -638,17 +647,20 @@ public class MainProg {
         Player player = players.players.get(currentPlayer);
         String id = player.getPlayerID() + player.orders().getSize();
         int orderSize = playerOrder.getRowCount();
-        String[] items = new String[orderSize];
-        String[] prices = new String[orderSize];
-        for (int i = 0; i < orderSize; i++){
-            items[i] = "" + playerOrder.getValueAt(i, 0);
-            prices[i] = "" + playerOrder.getValueAt(i, 1);
+        if (orderSize > 0) {
+            String[] items = new String[orderSize];
+            String[] prices = new String[orderSize];
+            for (int i = 0; i < orderSize; i++){
+                items[i] = "" + playerOrder.getValueAt(i, 0);
+                prices[i] = "" + playerOrder.getValueAt(i, 1);
+            }
+            player.orders().addOrder(new Order(id, items, prices)); //Add new order to the players Order array.
+            JOptionPane.showMessageDialog(null,
+                    "Order number for " + player.getPlayerName() + " is: " + id
+                            + ", and will be delivered shortly to lane " + player.getLane() + ".");
+            ResetCafe();
         }
-        player.orders().addOrder(new Order(id, items, prices)); //Add new order to the players Order array.
-        JOptionPane.showMessageDialog(null,
-                "Order number for " + player.getPlayerName() + " is: " + id
-                        + ", and will be delivered shortly to lane " + player.getLane() + ".");
-        ResetCafe();
+        else{JOptionPane.showMessageDialog(null, "You haven't added anything to the order.");}
     }
 
     private void ResetCafe() {
