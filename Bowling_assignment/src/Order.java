@@ -8,18 +8,8 @@ public class Order {
 
 
 	//Get and set infrastructure that can be used to process the order in a genuine use case.
-
-	public String getOrderID() { return orderID; }
-
-	public void setOrderID(String orderID) { this.orderID = orderID; }
-
-	public String[] getItems() { return items; }
-
-	public void setItems(String[] items) { this.items = items; }
-
-	public String[] getPrices() { return prices; }
-
-	public void setPrices(String[] prices) { this.prices = prices; }
+    public String[] getItems(){return this.items;}
+    public String[] getPrices(){return this.prices;}
 
     @Override
     public String toString() {
